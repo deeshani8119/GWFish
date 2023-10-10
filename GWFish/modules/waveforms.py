@@ -665,15 +665,27 @@ def phenomD_amp_MR(f, parameters, f_damp, f_RD, gamma1, gamma2, gamma3):
     
     return amp_MR_f, amp_MR_prime_f
 
+#class IMRPhenomD(Waveform):
+   # """ GWFish implementation of IMRPhenomD """
+   # def __init__(self, name, gw_params, data_params):
+      #  super().__init__(name, gw_params, data_params)
+       # self._maxn = None
+       # self.psi = None
+       # if self.name != 'IMRPhenomD':
+           # logging.warning('Different waveform name passed to IMRPhenomD: '+\
+                            # self.name)
 class IMRPhenomD(Waveform):
     """ GWFish implementation of IMRPhenomD """
-    def __init__(self, name, gw_params, data_params):
+    def __init__(self, name, gw_params, data_params, tilda_lambda=100):  # Add tilda_lambda as an argument with a default value
         super().__init__(name, gw_params, data_params)
         self._maxn = None
         self.psi = None
+        self.tilda_lambda = tilda_lambda  # Initialize tilda_lambda attribute
         if self.name != 'IMRPhenomD':
-            logging.warning('Different waveform name passed to IMRPhenomD: '+\
-                             self.name)
+            logging.warning('Different waveform name passed to IMRPhenomD: ' + self.name)
+
+
+
 
     def calculate_frequency_domain_strain(self):
         frequencyvector = self.frequencyvector[:,np.newaxis]
